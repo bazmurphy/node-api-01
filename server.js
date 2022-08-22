@@ -43,7 +43,7 @@ app.listen(3000, () => console.log("Server is listening on port 3000. Ready to a
 
 
 app.get("/", function(req, res) {
-    console.log(req);
+    // console.log(req);
     // ::: Break Exercise Try to console.log the request object inside the handler function.
     res.send("Yay Node!");
 })
@@ -114,3 +114,32 @@ app.get("/chocolate", function (req, res) {
 })
 // http://localhost:3000/chocolate?amount=6
 // You want 6 chocolate(s)
+
+
+// MULTIPLE QUERY PARAMETERS
+
+// What if we want to detect and read multiple parameters? 
+// If we use a URL from earlier as an example, here is how we would send multiple query parameters:
+// https://api.sunrise-sunset.org/json?lat=51.5311&lng=0.0481
+
+// Here we have one parameter called "lat" and another "lng".
+// Here is how we would do that in Node:
+
+app.get("/json", function (req, res) {
+  let lat = req.query.lat;
+  let lng = req.query.lng;
+  res.send(`You searched for Lat: ${lat} and Lng: ${lng}`);
+});
+
+// Exercise
+// Add some code so that your server takes 2 values that we will multiply together and return the value 
+// For example
+// http://localhost:3000/multiply?value1=2&value2=10
+// This should return value of 20
+
+app.get("/multiply", function (req, res) {
+    let a = req.query.value1;
+    let b = req.query.value2;
+    res.send(`You wanted to multiple ${a} with ${b}, that equals ${a * b}`)
+});
+// You wanted to multiple 2 with 10, that equals 20
